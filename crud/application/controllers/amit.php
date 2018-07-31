@@ -16,8 +16,10 @@
 			//print_r(this);
 			// $this->load->view('index');
 			$this->load->model('crud');	
-			$result=$this->crud->index();	
+			$result=$this->crud->index();
+			// print_r($result);
 			$data = array('userlist'=>$result);	
+			// print_r($data) ;
 			$this->load->view("index",$data);	
 		}
 		
@@ -42,7 +44,7 @@
     	// echo $id;
 		$this->load->model('crud');
 		$item = $this->crud->find_item($id);	
-        // print_r($item);
+   //      print_r($item);
 			$data['data'] = array('userlist'=>$item);
         // print_r($data);
 		$this->load->view("models",$data);	
@@ -53,7 +55,7 @@
 			$this->load->model('crud');
 			$this->crud->editdata($_POST);
 			redirect(base_url());	
-			
+
 		}
 		
 	}

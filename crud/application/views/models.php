@@ -8,8 +8,9 @@
    <!-- Modal content-->  
  
     <div class="container">  <?php  
+    // print_r($data);
     // print_r($data['userlist']);
-     // foreach($userlist->item() as $re){ ?> 
+      ?> 
         <form method="post" action="<?php echo base_url();?>index.php/amit/update"> 
           <div class="form-group">  
             <label for="ID">Id:</label> 
@@ -32,10 +33,10 @@
           </div>  
           <button type="submit" class="btn btn-default">Submit</button> 
         </form> 
-        <?php// } ?>
+        
      
-    <div class="modal-footer">  
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+    <div class="modal-footer">  <a href="<?php echo base_url();?>">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> </a>
     </div>
     </div> 
     

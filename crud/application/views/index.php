@@ -26,7 +26,7 @@
   </div>  
 </div>  
 </form>   
- <?php  
+ <?php  //print_r($userlist->result());
 echo'<table class="table">  
       <table class="table table-striped table-hover table-bordered">  
         <thead><tr style="text-align:center;">  
@@ -45,7 +45,8 @@ echo'<table class="table">
               <td>'.$re->pass.'</td> 
               <td><a type="button" class="btn btn-success" href="'.base_url('index.php/amit/delete/'.$re->id).'">Delete</a></td>  
               <td><a type="button" class="btn btn-success"  href="'.base_url('index.php/amit/edit/'.$re->id).'">Edit</a></td> 
-             </tr>';  
+             </tr>';
+             // print_r($re);  
       
 } 
  echo '</tbody> 
