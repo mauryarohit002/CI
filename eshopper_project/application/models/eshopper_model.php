@@ -40,7 +40,27 @@ class Eshopper_model extends CI_Model {
 		return $data;
 	}
 
-	
+	function insert($data,$tbl){
+		print_r($data);
+		echo $tbl;
+		$this->db->insert($tbl,$data);
+	}
+
+	function aoth($data){
+		//print_r($data);
+		 $answer = $this->db->get_where('login',array('uemail'=>$data['uemail']))->result();
+		 //print_r($answer);
+		//$this->db->insert($tbl,$data);
+		 if(empty($answer)){
+		 	return 'Invalide email ID';	
+		 }else{
+		 		if($answer[0]->upass == $data['upass']){
+		 			return TRUE;
+		 		}else{
+		 			return 'INvalide Password';
+		 		}
+		 }
+	}
 
 }
 ?>

@@ -161,5 +161,69 @@ class Eshopper extends CI_Controller {
 
 
 	}
+
+	function login(){
+		if($this->session->userdata('uemail')){
+			redirect(base_url());
+		}
+		else{
+		$this->load->view("login");
+		}
+	}
+
+	public function register_action(){
+		//echo "test";
+		$this->form_validation->set_rules('uname', 'person_name', 'required|min_length[3]|max_length[10]');
+		$this->form_validation->set_rules('uemail', 'email', 'required|valid_email|is_unique[login.uemail]');
+		$this->form_validation->set_rules('upass', 'password', 'required|min_length[3]|max_length[10]');
+		$this->form_validation->set_rules('uc_pass', 'confirm password', 'required|min_length[3]|max_length[10]|matches[upass]');
+		$this->form_validation->set_rules('umobile', 'mobile no', 'required|integer|exact_length[10]');
+
+		if($this->form_validation->run()==FALSE){
+
+			echo validation_errors();
+
+		}else{
+			//echo "OK";
+			unset($_POST['uc_pass']);
+			$_POST['upass']= do_hash($_POST['upass']);
+			//print_r($_POST);
+			$this->load->model('eshopper_model');
+
+			$this->eshopper_model->insert($_POST,$tbl_name = 'login');
+		}
+	}
+
+	public function login_action(){
+		//echo "test";
+		
+		$this->form_validation->set_rules('uemail', 'email', 'required|valid_email');
+		$this->form_validation->set_rules('upass', 'password', 'required|min_length[3]|max_length[10]');
+		
+		if($this->form_validation->run()==FALSE){
+
+			echo validation_errors();
+
+		}else{
+			//echo "OK";
+			$this->load->model('eshopper_model');
+			$_POST['upass']= do_hash($_POST['upass']);
+			$answer = $this->eshopper_model->aoth($_POST);
+			//echo $answer;
+			if($answer==1){
+				$this->session->set_userdata('uemail',$_POST['uemail']);
+				echo "1";
+			}
+			else{
+				echo $answer;
+			}
+		}
+	}
+	function logout(){
+		$this->session->unset_userdata('uemail');
+		$this->session->sess_destroy();
+		redirect(base_url());
+	}
+
 }
 ?>
