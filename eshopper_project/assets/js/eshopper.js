@@ -65,4 +65,47 @@ $("document").ready(function(){
 			}
 		})
 	})
+
+
+	// ####################################
+	$(".register").click(function(obj){
+		obj.preventDefault();
+		// id=$(this).attr("for")
+		 // alert(id);
+		 // alert(basepath+"filter_cat")
+		$.ajax({
+			type:"post",
+			data:$("#register").serialize(),
+			url:basepath+"register_action",
+			success:function(res){
+				$('.register_error').html(res);
+			}
+		});
+	});
+
+	// ####################################
+	$(".login").click(function(obj){
+		obj.preventDefault();
+		// id=$(this).attr("for")
+		 // alert(id);
+		 // alert(basepath+"filter_cat")
+		$.ajax({
+			type:"post",
+			data:$("#login").serialize(),
+			url:basepath+"login_action",
+			success:function(res){
+				
+				if(res==1){
+					window.location.href="http://localhost/rohit/ci/";
+				}
+				else{
+					$('.login_error').html(res);
+				}
+			}
+		});
+	});
+
+
+
 })
+
